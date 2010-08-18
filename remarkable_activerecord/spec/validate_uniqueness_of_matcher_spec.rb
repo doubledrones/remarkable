@@ -131,7 +131,7 @@ describe 'validate_uniqueness_of' do
 
       User.stub!(:find).and_return do |many, conditions|
         if many == :all
-          1000.upto(1100).map{|i| User.new(:email => i) }
+          (1000..1100).to_a.map{|i| User.new(:email => i) }
         else
           User.new(:username => 'jose')
         end
@@ -140,7 +140,7 @@ describe 'validate_uniqueness_of' do
 
       User.stub!(:find).and_return do |many, conditions|
         if many == :all
-          1000.upto(1099).map{|i| User.new(:email => i) }
+          (1000..1099).to_a.map{|i| User.new(:email => i) }
         else
           User.new(:username => 'jose')
         end

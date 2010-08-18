@@ -45,7 +45,7 @@ module Remarkable
 
             options = conditions.empty? ? {} : { :conditions => conditions.join(' AND ') }
 
-            return true if @existing = subject_class.find(:first, options)
+            return true if @existing = subject_class.send(:with_exclusive_scope) { subject_class.find(:first, options) }
             raise ScriptError, "could not find a #{subject_class} record in the database" + message
           end
 
